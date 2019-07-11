@@ -61,11 +61,11 @@ pip install pretty_midi
 python data/synth_server.py 1337
 ```
 
-This will expose an RPC server on port `1337` with a two methods `tx1_to_wav` and `tx2_to_wav`. Both take a `TX1/TX2` input file path, a `WAV` output file path`, and optionally a `MIDI` downsample rate downsample rate. A lower rate speeds up synthesis but will mess up the rhythms (full rate if not specified).
+This will expose an RPC server on port `1337` with two methods: `tx1_to_wav` and `tx2_to_wav`. Both take a `TX1/TX2` input file path, a `WAV` output file path, and optionally a `MIDI` downsampling rate. A lower rate speeds up synthesis but will mess up the rhythms (if not specified, no downsampling will occur).
 
 ### (Optional) Test your synthesis environment on human-composed music
 
-If you wish to test your synthesis environment on human-composed music, you first need to [download the data](#download-data). Then, if you have both your [generation](#model-environment) and [synthesis](#synthesis-environment) ready, you can test your synthesis environment:
+If you wish to test your synthesis environment on human-composed music, you first need to [download the data](#download-data). Then, if you have both your [model](#model-environment) and [synthesis](#synthesis-environment) environments ready, you can synthesize a chiptune from Kirby's Adventure:
 
 ```
 source LakhNES-model/bin/activate
@@ -77,7 +77,7 @@ aplay plains_tx2.wav
 
 ## Download checkpoints
 
-Here we provide all of the Transformer-XL checkpoints used for the results in our paper. All of them use TX1. We recommend using the `LakhNES` checkpoint which was pretrained on Lakh MIDI for 400k batches before fine tuning on NES-MDB. However, the others can also produce interesting results (in particular `NESAug`).
+Here we provide all of the Transformer-XL checkpoints used for the results in our paper. We recommend using the `LakhNES` checkpoint which was pretrained on Lakh MIDI for 400k batches before fine tuning on NES-MDB. However, the others can also produce interesting results (in particular `NESAug`).
 
 * (147 MB) (**Recommended**) [Download](https://drive.google.com/open?id=1ND27trP3pTAl6eAk5QiYE9JjLOivqGsd "856e2ec6db1568d6712d73703804a518616174aaf6eb419ea763bf7490b0b61c") `LakhNES` (400k steps Lakh pre-training)
 * (147 MB) [Download](https://drive.google.com/open?id=19SN-1vxbNhm_i3lMb_swMVeg5PYiQmkF "b4cec0333e30be6bea04fddfef807ca426e7367c64688619b2da085ff5d1fcfb") `Lakh200k` (200k steps Lakh pre-training)
@@ -134,13 +134,13 @@ This should take a few minutes and yield valid PPLs of `[4.099, 3.175, 2.911, 2.
 
 ## Train LakhNES
 
-I (Chris) admit it. My patch of [the official Transformer-XL codebase](https://github.com/kimiyoung/transformer-xl) (which lives under the `model` subdirectory) is among the ugliest code I've ever written. Instructions about how to use it are forthcoming. For now, I focused on making the [pretrained checkpoints](#download-checkpoints) easy to use. I hope that will suffice for now.
+I (Chris) admit it. My patch of [the official Transformer-XL codebase](https://github.com/kimiyoung/transformer-xl) (which lives under the `model` subdirectory) is among the ugliest code I've ever written. Instructions about how to use it are forthcoming, though the adventurous among you are welcome to try before then. For now, I focused on making the [pretrained checkpoints](#download-checkpoints) easy to use. I hope that will suffice for now.
 
 One asset of our training pipeline, the code which adapts Lakh MIDI to NES MIDI for transfer learning, is somewhat more polished. It can be found at `LakhNES/data/adapt_lakh_to_nes.py`.
 
 ## User study
 
-Information about how to use the code in the `userstudy` directory is forthcoming.
+Information about how to use the code for our Amazon Mechanical Turk user study (under `LakhNES/userstudy`) is forthcoming.
 
 ## Attribution
 
