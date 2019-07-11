@@ -12,7 +12,7 @@ LakhNES ([paper](), [music examples](https://chrisdonahue.com/LakhNES)) is a dee
 
 This codebase primarily functions to allow for the generation of musical material using the pre-trained LakhNES model. LakhNES outputs sequences of musical events which need to be separately synthesized into 8-bit audio. The steps required are as follows:
 
-1. [Set up your generation environment](#generation-environment)
+1. [Set up your model environment](#model-environment)
 1. [Set up your audio synthesis environment](#synthesis-environment)
 1. [Download a pre-trained checkpoint](#download-checkpoints)
 1. [Generate and listen to chiptunes](#generate-new-chiptunes)
@@ -21,7 +21,7 @@ This codebase primarily functions to allow for the generation of musical materia
 
 This codebase also allows you to evaluate pre-trained models to reproduce the paper results. The steps required for this use case are as follows:
 
-1. [Set up your generation environment](#generation-environment)
+1. [Set up your model environment](#model-environment)
 1. [Download the pre-trained checkpoints](#download-checkpoints)
 1. [Run the eval script](#reproduce-paper-results)
 
@@ -29,13 +29,13 @@ This codebase also allows you to evaluate pre-trained models to reproduce the pa
 
 With this codebase you can also train a new model (though the documentation for this is still being improved):
 
-1. [Set up your generation environment](#generation-environment)
+1. [Set up your model environment](#model-environment)
 1. [Download the data](#download-data)
 1. [Train a new model](#train-lakhnes)
 
-## Generation environment
+## Model environment
 
-The generation environment requires Python 3 and Pytorch. The development version of Pytorch was `1.0.1.post2`, but hopefully the newest version will continue to work (see [this section](#reproduce-paper-results) for a sanity check).
+The model environment requires Python 3 and Pytorch. The development version of Pytorch was `1.0.1.post2`, but hopefully the newest version will continue to work (see [this section](#reproduce-paper-results) for a sanity check).
 
 We recommend using `virtualenv` as you will need a separate environment to perform [audio synthesis](#synthesis-environment).
 
@@ -65,7 +65,7 @@ This will expose an RPC server on port `1337` with a two methods `tx1_to_wav` an
 
 ### (Optional) Test your synthesis environment on human-composed music
 
-If you wish to test your synthesis environment on human-composed music, you first need to [download the data](#download-data). Then, if you have both your [generation](#generation-environment) and [synthesis](#synthesis-environment) ready, you can test your synthesis environment:
+If you wish to test your synthesis environment on human-composed music, you first need to [download the data](#download-data). Then, if you have both your [generation](#model-environment) and [synthesis](#synthesis-environment) ready, you can test your synthesis environment:
 
 ```
 source LakhNES-gen/bin/activate
@@ -87,7 +87,7 @@ Here we provide all of the Transformer-XL checkpoints used for the results in ou
 
 ## Generate new chiptunes
 
-To generate new chiptunes, first [set up your generation environment](#generation-environment), [download a checkpoint](#download-checkpoints), and [start your synthesis server](#synthesis-environment). Then, run the following:
+To generate new chiptunes, first [set up your model environment](#model-environment), [download a checkpoint](#download-checkpoints), and [start your synthesis server](#synthesis-environment). Then, run the following:
 
 ```
 source LakhNES-gen/bin/activate
