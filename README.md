@@ -1,6 +1,8 @@
 # LakhNES: Generate 8-bit music with machine learning
 
+<p align="center">
 <img src="https://chrisdonahue.com/LakhNES/logo.png" width="50%"/>
+</p>
 
 LakhNES
 
