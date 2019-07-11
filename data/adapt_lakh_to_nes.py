@@ -257,18 +257,12 @@ if __name__ == '__main__':
   import pretty_midi
   from tqdm import tqdm
 
-  midi_fps = glob.glob('/home/cdonahue/deepfugue/deepfugue/data/raw/lakh/lmd_full/*/*.mid*')
-  #out_dir = './debug'
-  out_dir = '/home/cdonahue/txl/transformer-xl/data/03_22_lakh_midi_yeperc'
+  midi_fps = glob.glob('./lakh/lmd_full/*/*.mid*')
+  out_dir = './out'
 
   if os.path.isdir(out_dir):
     shutil.rmtree(out_dir)
   os.makedirs(out_dir)
-
-  #for midi_fp in midi_fps:
-  #  if '2022c093138f17c28177d21d674c1410' not in midi_fp:
-  #    continue
-  #  emit_nesmdb_midi_examples(midi_fp, out_dir)
 
   def _task(x):
     emit_nesmdb_midi_examples(x, out_dir)

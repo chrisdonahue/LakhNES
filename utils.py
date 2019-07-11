@@ -2,6 +2,33 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
+def load_vocab(vocab_fp):
+  idx2sym = ['<S>']
+  wait_amts = []
+  with open(vocab_fp, 'r') as f:
+    for line in f:
+      idx2sym.append(line.strip().split(',')[-1])
+      if line[:2] == 'WT':
+        wait_amts.append(int(line[3:]))
+  sym2idx = {s:i for i, s in enumerate(idx2sym)}
+  return idx2sym, sym2idx, wait_amts
+
+
+def quantize_wait_event(wait_event):
+  wait_time = int(wait_event[3:])
+  diff = float('inf')
+  candidate = None
+
+  for t in wait_amts:
+    cur_diff = abs(wait_time - t)
+    if cur_diff < diff:
+      diff = cur_diff
+      candidate = t
+    else:
+      break
+  return 'WT_{}'.format(candidate)
+
+
 class TxlSimpleSampler:
   def __init__(self, model, device, tgt_len=1, mem_len=896, ext_len=0):
     if tgt_len != 1:
@@ -86,64 +113,3 @@ class TxlSimpleSampler:
     token = int(token.item())
     
     return token, probs
-
-
-if __name__ == '__main__':
-  import os
-
-  MODELS = [
-    '/home/cdonahue/txl/transformer-xl/models/papermodels/finetune400k',
-  ]
-  OUT_DIRS = [
-    './testchurr'
-  ]
-  EXTS = [
-      '.tx1.txt',
-  ]
-
-  USE_CUDA = True
-  GEN_LEN = 2048
-
-  for model_dir, sample_dir, ext in zip(MODELS, OUT_DIRS, EXTS):
-    model_fp = os.path.join(model_dir, 'model.pt')
-    vocab_fp = os.path.join(model_dir, 'vocab.txt')
-    if not os.path.isdir(sample_dir):
-      os.makedirs(sample_dir)
-
-    device = torch.device("cuda" if USE_CUDA else "cpu")
-
-    # Load the best saved model.
-    with open(model_fp, 'rb') as f:
-      model = torch.load(f)
-    model.backward_compatible()
-    model = model.to(device)
-
-    # Make sure model uses vanilla softmax.
-    if model.sample_softmax > 0:
-      raise NotImplementedError()
-    if model.crit.n_clusters != 0:
-      raise NotImplementedError()
-
-    # Load the vocab.
-    idx2sym = ['<S>']
-    with open(vocab_fp, 'r') as f:
-      for line in f:
-        idx2sym.append(line.strip().split(',')[-1])
-    sym2idx = {s:i for i, s in enumerate(idx2sym)}
-
-    for memlen in [512]:
-      for temp in [0.9, 0.92, 0.94, 0.96, 0.98, 1.]:
-        for topk in [16, 32, 64]:
-          for i in range(64):
-            out_fn = 'memlen_{}_temp_{}_topk_{}_i_{}{}'.format(memlen, temp, topk, i, ext)
-            out_fp = os.path.join(sample_dir, out_fn)
-            if os.path.exists(out_fp):
-              print(out_fp)
-              continue
-            sampler = TxlSimpleSampler(model, device, mem_len=memlen)
-            seq = [0]
-            for _ in range(GEN_LEN):
-              token, _ = sampler.sample_next_token_updating_mem(seq[-1], temp=temp, topk=topk)
-              seq.append(token)
-            with open(out_fp, 'w') as f:
-              f.write('\n'.join(idx2sym[t] for t in seq[1:]))

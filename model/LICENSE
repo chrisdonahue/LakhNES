@@ -1,6 +1,4 @@
-This LICENSE file only applies to the code in this `model/` subdirectory.
-Code in this directory is from https://github.com/kimiyoung/transformer-xl 
-and was forked on February 22nd 2019.
+This LICENSE file only applies to the code in this `model/` subdirectory, except for the file `model/augment.py` which was written by @chrisdonahue. Code in this directory is lightly modified from https://github.com/kimiyoung/transformer-xl and was forked on February 22nd 2019.
 
                                  Apache License
                            Version 2.0, January 2004

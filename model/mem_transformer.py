@@ -1,8 +1,6 @@
 """
-Gently modified from the original to add
+Gently modified by @chrisdonahue from the original
 https://raw.githubusercontent.com/kimiyoung/transformer-xl/master/pytorch/mem_transformer.py
-
-A gently-modified 
 """
 
 import sys
