@@ -99,6 +99,8 @@ python data/synth_client.py ./generated/0.tx1.txt ./generated/0.tx1.wav
 aplay ./generated/0.tx1.wav
 ```
 
+We've also included the IPython notebooks we used to create the continuations of human-composed chiptunes (`continuations.ipynb`) and rhythm accompaniment examples (`accompany_rhythm.ipynb`) as heard on our [examples page](https://chrisdonahue.com/LakhNES).
+
 ## Download data
 
 <p align="center">
