@@ -105,6 +105,7 @@ We've also included the IPython notebooks we used to create the continuations of
 
 <p align="center">
 <img src="https://github.com/chrisdonahue/LakhNES/raw/gh-pages/tx1.png" width="50%"/>
+<br/>
 <i>To adapt the data to the Transformer architecture, we process MIDI files (top) into an event-based representation akin to language (below). Each token in this format describes some musically-salient event such as a note starting/ending or a time shift.</i>
 </p>
 
