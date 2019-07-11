@@ -106,7 +106,7 @@ We've also included the IPython notebooks we used to create the continuations of
 <p align="center">
 <img src="https://github.com/chrisdonahue/LakhNES/raw/gh-pages/tx1.png" width="50%"/>
 <br/>
-<i>To adapt the data to the Transformer architecture, we process MIDI files (top) into an event-based representation akin to language (below). Each token in this format describes some musically-salient event such as a note starting/ending or a time shift.</i>
+<i>To adapt music data to the Transformer architecture, we process MIDI files (top) into an event-based representation akin to language (bottom). Each event is musically meaningful such as a note starting or time advancing.</i>
 </p>
 
 LakhNES is first trained on [Lakh MIDI](https://colinraffel.com/projects/lmd/) and then fine tuned on [NES-MDB](https://github.com/chrisdonahue/nesmdb). The MIDI files from these datasets are first converted into a list of musical *events* to adapt them to the Transformer architecture.
