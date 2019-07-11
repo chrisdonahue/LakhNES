@@ -8,6 +8,8 @@ LakhNES ([paper](), [music examples](https://chrisdonahue.com/LakhNES)) is a dee
 
 ## Using this codebase
 
+### Generating new chiptunes
+
 This codebase primarily functions to allow for the generation of musical material using the pre-trained LakhNES model. LakhNES outputs sequences of musical events which need to be separately synthesized into 8-bit audio. The steps required are as follows:
 
 1. [Set up your generation environment](#generation-environment)
@@ -15,11 +17,15 @@ This codebase primarily functions to allow for the generation of musical materia
 1. [Download a pre-trained checkpoint](#download-checkpoints)
 1. [Generate and listen to chiptunes](#generate-new-chiptunes)
 
+### Evaluating pre-trained checkpoints
+
 This codebase also allows you to evaluate pre-trained models to reproduce the paper results. The steps required for this use case are as follows:
 
 1. [Set up your generation environment](#generation-environment)
 1. [Download the pre-trained checkpoints](#download-checkpoints)
 1. [Run the eval script](#reproduce-paper-results)
+
+### Training new checkpoints
 
 With this codebase you can also train a new model (though the documentation for this is still being improved):
 
