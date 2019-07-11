@@ -41,8 +41,8 @@ We recommend using `virtualenv` as you will need a separate environment to perfo
 
 ```
 cd LakhNES
-virtualenv -p python3 --no-site-packages LakhNES-gen
-source LakhNES-gen/bin/activate
+virtualenv -p python3 --no-site-packages LakhNES-model
+source LakhNES-model/bin/activate
 pip install torch==1.0.1.post2 torchvision==0.2.2.post3
 ```
 
@@ -68,7 +68,7 @@ This will expose an RPC server on port `1337` with a two methods `tx1_to_wav` an
 If you wish to test your synthesis environment on human-composed music, you first need to [download the data](#download-data). Then, if you have both your [generation](#model-environment) and [synthesis](#synthesis-environment) ready, you can test your synthesis environment:
 
 ```
-source LakhNES-gen/bin/activate
+source LakhNES-model/bin/activate
 python data/synth_client.py data/nesmdb_tx1/train/191_Kirby_sAdventure_02_03PlainsLevel.tx1.txt plains_tx1.wav 48
 aplay plains_tx1.wav
 python data/synth_client.py data/nesmdb_tx2/train/191_Kirby_sAdventure_02_03PlainsLevel.tx2.txt plains_tx2.wav 48
@@ -90,7 +90,7 @@ Here we provide all of the Transformer-XL checkpoints used for the results in ou
 To generate new chiptunes, first [set up your model environment](#model-environment), [download a checkpoint](#download-checkpoints), and [start your synthesis server](#synthesis-environment). Then, run the following:
 
 ```
-source LakhNES-gen/bin/activate
+source LakhNES-model/bin/activate
 python generate.py \
 	<MODEL_DIR> \
 	--out_dir ./generated \
@@ -125,7 +125,7 @@ TODO
 If you download all of the above checkpoints and `tar xvfz` them under `LakhNES/model/pretrained`, you can reproduce the exact numbers from our paper (Table 2 and Figure 3):
 
 ```
-source LakhNES-gen/bin/activate
+source LakhNES-model/bin/activate
 cd model
 ./reproduce_paper_eval.sh
 ```
