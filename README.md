@@ -101,7 +101,11 @@ aplay ./generated/0.tx1.wav
 
 ## Download data
 
-LakhNES is first trained on [Lakh MIDI](https://colinraffel.com/projects/lmd/) and then fine tuned on [NES-MDB](https://github.com/chrisdonahue/nesmdb). The MIDI files from these datasets are first converted into a list of musical *events* (words), so that the data is easily ingested into NLP-focused pipelines.
+<p align="center">
+<img src="https://chrisdonahue.com/LakhNES/tx1.png" width="50%"/>
+</p>
+
+LakhNES is first trained on [Lakh MIDI](https://colinraffel.com/projects/lmd/) and then fine tuned on [NES-MDB](https://github.com/chrisdonahue/nesmdb). The MIDI files from these datasets are first converted into a list of musical *events* to adapt them to the Transformer architecture. An example is outlined in the above image.
 
 The NES-MDB dataset has been preprocessed into two event-based formats: `TX1` and `TX2`. The [`TX1` format](#tx1-format) only has *composition* information: the notes and their timings. The [`TX2` format](#tx2-format) has *expressive* information: dynamics and timbre information.
 
@@ -110,15 +114,7 @@ You can get the data in `TX1` (used in our paper) and `TX2` (*not* used in our p
 * (10 MB) [Download](https://drive.google.com/open?id=1WO6guGagqaw22LH32_NEBeavtbaWy_ar "94763d90ba98ca457b64af3c49b1ed7d9e1434e5ef534be34e836c71d4693cbe") NES-MDB in [TX1 Format](#tx1-format)
 * (20 MB) [Download](https://drive.google.com/open?id=1ko3LXvotfubZ-C8Xq_K01bWd5NWiduH9 "c787a4e04bcf6439a8674683e66f2b87062383296199f3ae3c0ef66de23c50e4") NES-MDB in [TX2 Format](#tx2-format)
 
-The remainder of the instructions assume you have moved (at least one of) these bundles to the `LakhNES/data` folder and `tar xvfz` them there.
-
-### TX1 Format
-
-TODO
-
-### TX2 Format
-
-TODO
+Other instructions in this README assume that you have moved (at least one of) these bundles to the `LakhNES/data` folder and `tar xvfz` them there.
 
 ## Reproduce paper results
 
