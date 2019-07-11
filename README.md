@@ -1,5 +1,9 @@
 # LakhNES: Generate 8-bit music with machine learning
 
+<img src="https://chrisdonahue.com/LakhNES/logo.png"/>
+
+LakhNES
+
 ## Get the data
 
 LakhNES is first trained on [Lakh MIDI](https://colinraffel.com/projects/lmd/) and then fine tuned on [NES-MDB](https://github.com/chrisdonahue/nesmdb). The MIDI files from these datasets are first converted into a list of musical *events* (words), so that the data is easily ingested into NLP-focused pipelines.
@@ -23,11 +27,15 @@ TODO
 
 ## Generation environment
 
+This codebase requires Python 3 and Pytorch. The development version of Pytorch was `1.0.1.post2`, but hopefully the newest version will continue to work (see [this section](#reproduce-paper-results) for a sanity check).
+
+We recommend using `virtualenv` as you will need a separate environment to perform [audio synthesis](#synthesis-environment).
+
 ```
 cd LakhNES
 virtualenv -p python3 --no-site-packages LakhNES-gen
 source LakhNES-gen/bin/activate
-pip install torch torchvision
+pip install torch==1.0.1.post2 torchvision==0.2.2.post3
 ```
 
 ## Synthesis environment
@@ -59,21 +67,25 @@ aplay plains_tx2.wav
 
 ## Download checkpoints
 
-Here we provide all of the Transformer-XL checkpoints used for the results in our paper. All of them use TX1. We recommend using the `LakhNES` checkpoint (which was pretrained on Lakh MIDI for 400k batches before fine tuning on NES-MDB), but the others can also produce interesting results (in particular *NESAug*).
+Here we provide all of the Transformer-XL checkpoints used for the results in our paper. All of them use TX1. We recommend using the `LakhNES` checkpoint which was pretrained on Lakh MIDI for 400k batches before fine tuning on NES-MDB. However, the others can also produce interesting results (in particular `NESAug`).
 
-* (147 MB) **Recommended** [Download](https://drive.google.com/open?id=1ND27trP3pTAl6eAk5QiYE9JjLOivqGsd "856e2ec6db1568d6712d73703804a518616174aaf6eb419ea763bf7490b0b61c") `LakhNES` (400k steps Lakh pre-training)
+* (147 MB) (**Recommended**) [Download](https://drive.google.com/open?id=1ND27trP3pTAl6eAk5QiYE9JjLOivqGsd "856e2ec6db1568d6712d73703804a518616174aaf6eb419ea763bf7490b0b61c") `LakhNES` (400k steps Lakh pre-training)
 * (147 MB) [Download](https://drive.google.com/open?id=19SN-1vxbNhm_i3lMb_swMVeg5PYiQmkF "b4cec0333e30be6bea04fddfef807ca426e7367c64688619b2da085ff5d1fcfb") `Lakh200k` (200k steps Lakh pre-training)
 * (147 MB) [Download](https://drive.google.com/open?id=1dmqCQ7qqjfyJF-wK8AYgPqgNRRDjyYmR "1fe9606306e9d1e8511a730ab2e67909a86d76a79e96aa90d49be90e0de75a18") `Lakh100k` (100k steps Lakh pre-training)
 * (147 MB) [Download](https://drive.google.com/open?id=13lCurR-OWpqCAu_KehogkAU18-jVm3lU "d137ddc03796bd247d5b200512c0464c1ab33772e7c7511de9e9b2bc7d4a2d83") `NESAug` (No Lakh pre-training but uses data augmentation)
 * (147 MB) [Download](https://drive.google.com/open?id=1qgN1PxOdSZ8T-zwLqSRvjIXmdV062J3- "b297c5afedd6f11e5d2d4a57e89887161f29c9dada97af0d367da76b06c43e65") `NES` (No Lakh pre-training or data augmentation)
 
-If you download all of the checkpoints and `tar xvfz` them under `LakhNES/model/pretrained`, you can reproduce the exact numbers from our paper (Table 2 and Figure 3):
+### Reproduce paper results
+
+If you download all of the above checkpoints and `tar xvfz` them under `LakhNES/model/pretrained`, you can reproduce the exact numbers from our paper (Table 2 and Figure 3):
 
 ```
 source LakhNES-gen/bin/activate
 cd model
 ./reproduce_paper_eval.sh
 ```
+
+This should take a few minutes and yield valid PPLs of [`4.099`, `3.175`, `2.911`, `2.817`, `2.800`] and test PPLs of [`3.501`, `2.741`, `2.545`, `2.472`, `2.460`] in order.
 
 ## Generate new chiptunes
 
@@ -91,9 +103,13 @@ aplay ./generated/0.tx1.wav
 
 ## Train LakhNES
 
-I (Chris) admit it. My patch of [the official Transformer-XL codebase](https://github.com/kimiyoung/transformer-xl) (which lives under the `model` subdirectory) is just about the ugliest code I've ever written. Instructions about how to use it are forthcoming. For now, I focused on making the [pretrained checkpoints](#download-a-pre-trained-checkpoint) easy to use. I hope that will suffice for now.
+I (Chris) admit it. My patch of [the official Transformer-XL codebase](https://github.com/kimiyoung/transformer-xl) (which lives under the `model` subdirectory) is among the ugliest code I've ever written. Instructions about how to use it are forthcoming. For now, I focused on making the [pretrained checkpoints](#download-checkpoints) easy to use. I hope that will suffice for now.
 
 One asset of our training pipeline, the code which adapts Lakh MIDI to NES MIDI for transfer learning, is somewhat more polished. It can be found at `LakhNES/data/adapt_lakh_to_nes.py`.
+
+## User study
+
+Information about how to use the code in the `userstudy` directory is forthcoming.
 
 ## Attribution
 
