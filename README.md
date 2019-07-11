@@ -1,7 +1,7 @@
 # LakhNES: Generate 8-bit music with machine learning
 
 <p align="center">
-<img src="https://chrisdonahue.com/LakhNES/logo.png" width="50%"/>
+<img src="https://github.com/chrisdonahue/LakhNES/raw/gh-pages/logo.png" width="50%"/>
 </p>
 
 LakhNES ([paper](), [music examples](https://chrisdonahue.com/LakhNES)) is a deep neural network capable of generating music that can be played by the audio synthesis chip on the Nintendo Entertainment System (NES). It was trained on music composed for the NES by humans. Our model takes advantage of transfer learning: we pre-train on the heterogeneous [Lakh MIDI](https://colinraffel.com/projects/lmd/) dataset before fine tuning on the [NES Music Database](https://github.com/chrisdonahue/nesmdb) target domain.
@@ -104,7 +104,7 @@ We've also included the IPython notebooks we used to create the continuations of
 ## Download data
 
 <p align="center">
-<img src="https://chrisdonahue.com/LakhNES/tx1.png" width="50%"/>
+<img src="https://github.com/chrisdonahue/LakhNES/raw/gh-pages/tx1.png" width="50%"/>
 </p>
 
 LakhNES is first trained on [Lakh MIDI](https://colinraffel.com/projects/lmd/) and then fine tuned on [NES-MDB](https://github.com/chrisdonahue/nesmdb). The MIDI files from these datasets are first converted into a list of musical *events* to adapt them to the Transformer architecture. An example is outlined in the above image.
