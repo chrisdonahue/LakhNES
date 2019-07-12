@@ -4,7 +4,7 @@
 <img src="https://github.com/chrisdonahue/LakhNES/raw/gh-pages/logo.png" width="50%"/>
 </p>
 
-LakhNES ([paper](), [music examples](https://chrisdonahue.com/LakhNES)) is a deep neural network capable of generating music that can be played by the audio synthesis chip on the Nintendo Entertainment System (NES). It was trained on music composed for the NES by humans. Our model takes advantage of transfer learning: we pre-train on the heterogeneous [Lakh MIDI](https://colinraffel.com/projects/lmd/) dataset before fine tuning on the [NES Music Database](https://github.com/chrisdonahue/nesmdb) target domain.
+LakhNES ([paper](https://arxiv.org/abs/1907.04868), [music examples](https://chrisdonahue.com/LakhNES)) is a deep neural network capable of generating music that can be played by the audio synthesis chip on the Nintendo Entertainment System (NES). It was trained on music composed for the NES by humans. Our model takes advantage of transfer learning: we pre-train on the heterogeneous [Lakh MIDI](https://colinraffel.com/projects/lmd/) dataset before fine tuning on the [NES Music Database](https://github.com/chrisdonahue/nesmdb) target domain.
 
 ## Using this codebase
 
