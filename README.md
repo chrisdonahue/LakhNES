@@ -84,6 +84,7 @@ Here we provide all of the Transformer-XL checkpoints used for the results in ou
 * (147 MB) [Download](https://drive.google.com/open?id=1dmqCQ7qqjfyJF-wK8AYgPqgNRRDjyYmR "1fe9606306e9d1e8511a730ab2e67909a86d76a79e96aa90d49be90e0de75a18") `Lakh100k` (100k steps Lakh pre-training)
 * (147 MB) [Download](https://drive.google.com/open?id=13lCurR-OWpqCAu_KehogkAU18-jVm3lU "d137ddc03796bd247d5b200512c0464c1ab33772e7c7511de9e9b2bc7d4a2d83") `NESAug` (No Lakh pre-training but uses data augmentation)
 * (147 MB) [Download](https://drive.google.com/open?id=1qgN1PxOdSZ8T-zwLqSRvjIXmdV062J3- "b297c5afedd6f11e5d2d4a57e89887161f29c9dada97af0d367da76b06c43e65") `NES` (No Lakh pre-training or data augmentation)
+* (147 MB) [Download](https://drive.google.com/open?id=1LqVqB9KwOegmWj5l5KJzakkLYVEHF2yb "9f235770f434ce26d540947b01e8d6db6bf046bc39e5d4523a82b6c4805b30b9") `Lakh400kPretrainOnly` (`LakhNES` model without NES-MDB finetuning)
 
 ## Generate new chiptunes
 
