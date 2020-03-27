@@ -1,21 +1,29 @@
 from collections import defaultdict
 
-_INSTAG2MIN = {
-    'P1': 33,
-    'P2': 33,
-    'TR': 21,
-    'NO': 1
-}
+INSTRUMENT_DATA = {
+  "DG": 18, "max_pitch": 108}, 
+  "AGP": 0, "max_pitch": 95}, 
+  "EBP":19, "max_pitch": 88}, 
+  "OG":12, "max_pitch": 103}, 
+  "EBF": 6, "max_pitch": 83}, 
+  "EGC": 5, "max_pitch": 100}, 
+  "AGS": {"min_pitch": 25, "max_pitch": 101}
+  }
 
-_INSTAG2MAX = {
-    'P1': 108,
-    'P2': 108,
-    'TR': 108,
-    'NO': 16
-}
+ALLOWED_INSTRUMENTS = list(INSTRUMENT_DATA.keys())
+ALL_INSTRUMENTS_MINUS_DRUMS = ALLOWED_INSTRUMENTS.copy().remove('AGP') # all instruments except accoustic grand piano, which for some reason acts like a drumb
+
+_INSTAG2MIN = {}
+_INSTAG2MAX = {}
+for instrument in INSTRUMENT_DATA:
+  _INSTAG2MIN[instrument] = INSTRUMENT_DATA[instrument]['min_pitch']
+  _INSTAG2MAX[instrument] = INSTRUMENT_DATA[instrument]['max_pitch']
 
 
-def nesmdb_select_instruments(events, ins=['P1', 'P2', 'TR', 'NO']):
+def nesmdb_select_instruments(events, ins=ALLOWED_INSTRUMENTS):
+  """
+  Filters out tokens in events list that are not relevant to instruments in ins
+  """
   if len(ins) == 4:
     return events
 
@@ -29,13 +37,16 @@ def nesmdb_select_instruments(events, ins=['P1', 'P2', 'TR', 'NO']):
 
 
 def nesmdb_switch_pulse(events):
+  """
+  Changed to switch between basses instead of between P1 and P2
+  """
   events_pulse_switched = []
   for event in events:
     tokens = event.split('_')
-    if tokens[0] == 'P1':
-      tokens[0] = 'P2'
-    elif tokens[0] == 'P2':
-      tokens[0] = 'P1'
+    if tokens[0] == 'EBF':
+      tokens[0] = 'EBP'
+    elif tokens[0] == 'EBP':
+      tokens[0] = 'EBF'
     events_pulse_switched.append('_'.join(tokens))
 
   return events_pulse_switched
@@ -48,7 +59,7 @@ def nesmdb_transpose(events, transpose_amt=0, instag2min=_INSTAG2MIN, instag2max
   events_transposed = []
   for event in events:
     event_tokens = event.split('_')
-    if event_tokens[1] == 'NOTEON' and event_tokens[0] in ['P1', 'P2', 'TR']:
+    if event_tokens[1] == 'NOTEON' and event_tokens[0] in ALL_INSTRUMENTS_MINUS_DRUMS:
       instag = event_tokens[0]
       midi_note = int(event_tokens[2])
       new_midi_note = midi_note + transpose_amt
@@ -106,7 +117,7 @@ if __name__ == '__main__':
   parser.add_argument('--pulse_switch', action='store_true')
 
   parser.set_defaults(
-      select_instruments='P1,P2,TR,NO',
+      select_instruments=','.join(ALLOWED_INSTRUMENTS),
       transpose_amt=0,
       playback_speed=1.,
       pulse_switch=False)

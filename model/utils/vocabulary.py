@@ -118,8 +118,8 @@ class Vocab(object):
 
             if augment_selectens:
                 if np.random.rand() < 0.5:
-                    numins = int(np.random.randint(1, 4))
-                    ins = ['P1', 'P2', 'TR', 'NO']
+                    numins = int(np.random.randint(1, len(ALLOWED_INSTRUMENTS)))
+                    ins = ALLOWED_INSTRUMENTS
                     ens = random.sample(ins, numins)
                     events = nesmdb_select_instruments(events, ens)
 
