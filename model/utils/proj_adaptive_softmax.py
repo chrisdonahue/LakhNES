@@ -6,9 +6,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-CUDA_MAJOR = int(torch.version.cuda.split('.')[0])
-CUDA_MINOR = int(torch.version.cuda.split('.')[1])
-
 class ProjectedAdaptiveLogSoftmax(nn.Module):
     def __init__(self, n_token, d_embed, d_proj, cutoffs, div_val=1,
                  keep_order=False):
@@ -60,13 +57,8 @@ class ProjectedAdaptiveLogSoftmax(nn.Module):
         if proj is None:
             logit = F.linear(hidden, weight, bias=bias)
         else:
-            # if CUDA_MAJOR <= 9 and CUDA_MINOR <= 1:
             proj_hid = F.linear(hidden, proj.t().contiguous())
             logit = F.linear(proj_hid, weight, bias=bias)
-            # else:
-            #     logit = torch.einsum('bd,de,ev->bv', (hidden, proj, weight.t()))
-            #     if bias is not None:
-            #         logit = logit + bias
 
         return logit
 

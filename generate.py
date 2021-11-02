@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
   # Load the best saved model.
   with open(model_fp, 'rb') as f:
-    model = torch.load(f)
+    model = torch.load(f, map_location=device)
   model.backward_compatible()
   model = model.to(device)
 
